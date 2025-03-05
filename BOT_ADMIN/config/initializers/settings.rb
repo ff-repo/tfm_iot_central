@@ -1,0 +1,11 @@
+# Debug Code
+RestClient.log = STDOUT # Comment this line to nil the log
+DISABLE_ENCRIPTION = false
+
+# Temporal Settigns
+REGISTER_URI = ENV['REGISTER_URI']
+REGISTER_POOL = ENV['REGISTER_POOL']
+CIPHER_KEY = ENV['CIPHER_KEY']
+CIPHER_IV = ENV['CIPHER_IV']
+MARKER = ENV['MARKER']
+MACHINE_ID = ENV['MACHINE_ID']
