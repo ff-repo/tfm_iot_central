@@ -1,0 +1,4 @@
+DISABLE_ENCRIPTION = ENV['DISABLE_ENCRIPTION'] == 'true'
+FIXIE_SOCKS_HOST = ENV['FIXIE_SOCKS_HOST']
+FIXIE_URL = ENV['FIXIE_URL']
+RestClient.log = STDOUT # Comment this line to nil the log

@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: central
+    ports:
+      - "5100:5432"
+
+  redis:
+    image: redis:7
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6300:6379"
+
+  web:
+    build: .
+    command: tail -f /dev/null
+    volumes:
+      - .:/app
+    ports:
+      - "3001:3000"
+      - "3002:443"
+      - "5100:5100"
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:
+  redis_data:

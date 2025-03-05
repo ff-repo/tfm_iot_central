@@ -1,0 +1,30 @@
+Dotenv.require_keys(
+  'DISABLE_ENCRIPTION',
+  'SECRET_KEY_BASE',
+  'NAMECHEAP_USERNAME',
+  'NAMECHEAP_API_KEY',
+  'NAMECHEAP_URI',
+  'NAMECHEAP_ME_CLIENT_IP',
+  'NAMECHEAP_REGISTER_L_NAME',
+  'NAMECHEAP_REGISTER_ADDRESS',
+  'NAMECHEAP_REGISTER_CITY',
+  'NAMECHEAP_REGISTER_PROVINCE',
+  'NAMECHEAP_REGISTER_ZIP',
+  'NAMECHEAP_REGISTER_COUNTRY',
+  'FIXIE_SOCKS_HOST'
+)
+
+if Rails.env.develpment?
+  Dotenv.require_keys(
+    'DB_HOST',
+    'DB_PORT',
+    'DB_NAME',
+    'DB_USER',
+    'DB_PASSWORD'
+  )
+elsif Rails.env.production?
+  Dotenv.require_keys(
+    'DATABASE_URL',
+    # 'REDISCLOUD_URL'
+    )
+end
