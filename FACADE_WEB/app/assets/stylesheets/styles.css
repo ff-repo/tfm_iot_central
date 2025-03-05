@@ -1,0 +1,111 @@
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Download Button */
+.download-btn {
+    font-size: 1rem;
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.download-btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Sidebar Styles */
+.sidebar-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    border: none;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.list-group-item a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+}
+
+.list-group-item:hover {
+    background: #007bff;
+    transform: scale(1.1);
+}
+
+.list-group-item.active {
+    background: #0056b3 !important;
+    color: white;
+}
+
+/* Article Card Styles */
+.article-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    padding-bottom: 20px;
+}
+
+.card-img-top {
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .list-group-item {
+        font-size: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .download-btn {
+        font-size: 0.9rem;
+    }
+}
+
+.dropdown-toggle {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .dropdown-menu {
+    min-width: 220px;
+  }
+
+  .dropdown-item {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  .dropdown-item:hover {
+    background: #007bff;
+    color: white;
+  }

