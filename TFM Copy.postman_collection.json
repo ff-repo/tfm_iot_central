@@ -1,0 +1,1057 @@
+{
+	"info": {
+		"_postman_id": "9141bf26-9035-49c2-91c8-0be2745e9e39",
+		"name": "TFM Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3880645"
+	},
+	"item": [
+		{
+			"name": "CC",
+			"item": [
+				{
+					"name": "session",
+					"item": [
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();\r",
+											"console.log(response);\r",
+											"pm.environment.set(\"CC User Session Token\", response.token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/login",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/logout",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "client gateway manager",
+					"item": [
+						{
+							"name": "list gateways of clients",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/client",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deploy new gateway",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "// Keep the format of domain name\r\n{\r\n    \"client\": {\r\n        \"domain_name\": \"newgatewaydomain.sbs\",\r\n        \"heroku_app\": \"api-gateway-iot-test-01\",\r\n        \"email\": \"test@testtest.com\",\r\n        \"bot_size\": 1,\r\n        \"quantity_days_for_renting\": \"1\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/client/deploy",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"client",
+										"deploy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shutdown gateway",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"client\": {\r\n        \"id\": 68\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/client/shut",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"client",
+										"shut"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "bots manager",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/bots",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "details of a bot",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/bots/6dc80a3c-57ac-4d85-a987-13fc289c7145",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"6dc80a3c-57ac-4d85-a987-13fc289c7145"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list commands",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/bots/commands",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"commands"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deply client bot",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"client_gateway_id\": 1,\r\n    \"code\": \"002\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/bots/execute",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"execute"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "command runner",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bots\": [\"dda961cf-c8de-4a26-9d35-f92564af560a\"],\r\n    \"code\": \"001\",\r\n    \"shell_command\": \"ls -la\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/bots/execute",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"execute"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check application Client deploy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bots\": [\"6dc80a3c-57ac-4d85-a987-13fc289c7145\"],\r\n    \"code\": \"004\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/bots/execute",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"execute"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shutdown client bot",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bots\": [\"13e94a2c-6c56-49f8-80d1-a72c8c065b00\"],\r\n    \"code\": \"003\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/bots/execute",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"execute"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shutdown bot",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{CC User API Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{CC User Session Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bots\": [\"d2576f66-2eea-4520-9ae1-9a564390a89d\"],\r\n    \"code\": \"999\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cc_domain}}/bots/execute",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"bots",
+										"execute"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "facade",
+					"item": [
+						{
+							"name": "admin app",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{Facade Web API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_facade_domain}}/app/admin",
+									"host": [
+										"{{cc_facade_domain}}"
+									],
+									"path": [
+										"app",
+										"admin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin dependency",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{Facade Web API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/app/admin_dependency",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"app",
+										"admin_dependency"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "client installer",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{Facade Web API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/app/client",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"app",
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "client dependency",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Api-Token",
+										"value": "{{Facade Web API Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cc_domain}}/app/client_dependency",
+									"host": [
+										"{{cc_domain}}"
+									],
+									"path": [
+										"app",
+										"client_dependency"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "API Gateway",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"console.log(response);\r",
+									"pm.environment.set(\"API Gateway User Session Token\", response.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"\",\r\n    \"password\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API Gateway Domain}}/login",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{API Gateway User Session Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API Gateway Domain}}/logout",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list bots",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{API Gateway User Session Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API Gateway Domain}}/bots",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"bots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "display infor of specific bot",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{API Gateway User Session Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API Gateway Domain}}/bots/7c96fccc-5080-4087-a01a-d6122279b01",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"bots",
+								"7c96fccc-5080-4087-a01a-d6122279b01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list commands",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{API Gateway User Session Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API Gateway Domain}}/commands",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"commands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "command runner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{API Gateway User Session Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bots\": [\"7c96fccc-5080-4087-a01a-d6122279b0a6\"],\r\n    \"code\": \"002\",\r\n    \"host\": \"www.testingfacade123223.com\",\r\n    \"port\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API Gateway Domain}}/commands/execute",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"commands",
+								"execute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "command runner (DNS look up)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{API Gateway User Session Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Api-Token",
+								"value": "{{API Gateway User API Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bots\": [\"cd30f9a3-9bd7-4784-a4a1-48343e263b80\"],\r\n    \"code\": \"009\",\r\n    \"host\": \"www.testingfacade123223.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API Gateway Domain}}/commands/execute",
+							"host": [
+								"{{API Gateway Domain}}"
+							],
+							"path": [
+								"commands",
+								"execute"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Facade",
+			"item": [
+				{
+					"name": "Portal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{facade_domain}}",
+							"host": [
+								"{{facade_domain}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin installer download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{facade_domain}}/pet_app",
+							"host": [
+								"{{facade_domain}}"
+							],
+							"path": [
+								"pet_app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin package dependency download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{facade_domain}}/pet_app_dependency",
+							"host": [
+								"{{facade_domain}}"
+							],
+							"path": [
+								"pet_app_dependency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client bot installer download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{facade_domain}}/groceries_app",
+							"host": [
+								"{{facade_domain}}"
+							],
+							"path": [
+								"groceries_app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client bot package dependency download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{facade_domain}}/groceries_app_dependency",
+							"host": [
+								"{{facade_domain}}"
+							],
+							"path": [
+								"groceries_app_dependency"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "bot code",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
