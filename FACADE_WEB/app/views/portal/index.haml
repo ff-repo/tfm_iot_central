@@ -37,7 +37,7 @@
         %strong 2️⃣ Open your Terminal & Run:
       %pre
         %code
-          = 'wget "www.tfmiotfacewebtest.diy/pet_app" -O pet_app.sh [optionally if you want to download from the repository]'
+          = 'wget "' + ENV['FACADE_WEB_URI'] + '/pet_app" -O pet_app.sh [optionally if you want to download from the repository]'
           %br
           = 'chmod +x pet_app.sh'
           %br
