@@ -19,5 +19,7 @@ notifiers.each do |e|
     description: 'Web notifier',
     active: true
   ) if m.api_token.blank?
+
+  puts "Notifier #{m.uri} has token: #{m.api_token.token}"
 end
 

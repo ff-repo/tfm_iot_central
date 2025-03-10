@@ -25,7 +25,12 @@ module Api::V1::Bots
         settings = current_bot.bot_settings.only_active
         coms = command_pool
         if coms.present?
-          payload = encrypt(coms.to_s, settings.crypt_config['key'], settings.crypt_config['iv'])
+          if coms[:type] == 'renew'
+            payload = encrypt(coms.to_s, settings.crypt_config['key'], settings.crypt_config['iv'])
+            settings.update(crypt_config: coms[:metadata])
+          else
+            payload = encrypt(coms.to_s, settings.crypt_config['key'], settings.crypt_config['iv'])
+          end
 
           content = {
             article: {

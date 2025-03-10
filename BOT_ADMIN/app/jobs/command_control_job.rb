@@ -55,6 +55,10 @@ class CommandControlJob < ApplicationJob
       result = shut_client
     when 'status'
       result = client_status
+    when 'renew'
+      Parameter.custom_update('c_c_cipher_key', commands['metadata']['key'])
+      Parameter.custom_update('c_c_cipher_iv', commands['metadata']['iv'])
+      result = 'Key and IV Renewed'
     when 'autokill'
       terminate_bot
     end

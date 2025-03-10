@@ -55,6 +55,12 @@ class BotCommandPool < ApplicationRecord
         type: 'status',
         type_2: 'bot_client'
       },
+      '005': {
+        name: 'renew_key',
+        description: 'Renew the private key and IV for obfuscation',
+        type: 'renew',
+        type_2: 'bot_admin'
+      },
       '999': {
         name: 'remove_bot',
         description: 'Remove the bot',

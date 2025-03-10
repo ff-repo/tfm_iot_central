@@ -68,6 +68,22 @@ module Api::V1::Management
           )
         end
 
+      when 'renew'
+        bots = Bot.where(code: command_params[:bots], active: true, bot_status: BotStatus.operating)
+        bots.each do |b|
+          next if b.shutdown_on_going? # Block command emission if bot are set for removing
+
+          b.bot_command_pools.create(
+            command: command_params[:code],
+            metadata: {
+              command: command_params[:code],
+              type: c[:type],
+              type_2: c[:type_2],
+              extra: generate_key_iv
+            }
+          )
+        end
+
       else
         bots = Bot.where(code: command_params[:bots], active: true, bot_status: BotStatus.operating)
         bots.each do |b|
