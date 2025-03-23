@@ -6,8 +6,7 @@ module ValidationsHelper
     domain_regex = /\A([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\z/
 
     if ip_or_domain.match?(ipv4_regex)
-      ip = IPAddr.new(ip) rescue nil
-      return false unless ip_obj
+      ip = IPAddr.new(ip_or_domain) rescue nil
 
       forbidden = [
         IPAddr.new('10.0.0.0/8'),
