@@ -20,4 +20,8 @@ class ApplicationService
   def print_ssh_output(message)
     puts "service(#{self.class.name.downcase})[debug]{notice}: #{message}"
   end
+
+  def print_generic_output(message)
+    puts "service(#{self.class.name.downcase})[debug]{notice}: #{message}"
+  end
 end

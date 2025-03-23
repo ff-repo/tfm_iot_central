@@ -25,7 +25,7 @@ module PingsHelper
 
     when 'http_get'
       url = [host_target, port].compact_blank.join(':')
-      response = RestClient::Request.execute(method: :get, url: url, max_redirects: 0, timeout: timeout)
+      response = RestClient::Request.execute(method: :get, url: url, max_redirects: 1, timeout: timeout)
       body = response.body
       result = body.present? ? body.gsub(/<!--.*?-->/m, '').first(120) : ''
 

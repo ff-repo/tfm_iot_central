@@ -165,6 +165,38 @@ module Heroku
       return CustomError.new(code: '2001', message: "Trying to delete app generate message: #{e.to_s}")
     end
 
+    def test_connection_ec2
+      get_key
+
+      Net::SSH.start(Parameter.deployer_host, Parameter.deployer_user, keys: [@key_file], passphrase: Parameter.deployer_passphrase, proxy: @socks_proxy, timeout: 30) do |ssh|
+        output = ssh.exec!("echo \"$(date '+%Y-%m-%d %H:%M:%S') - $(whoami) - Event Deletion\"")
+        print_ssh_output(output)
+      end
+
+      clean_up
+      nil
+
+    rescue  StandardError => e
+      clean_up
+      return CustomError.new(code: '2001', message: "Trying to test ec2 connection generate message: #{e.to_s}")
+    end
+
+    def test_connection_heroku
+      get_key
+
+      Net::SSH.start(Parameter.deployer_host, Parameter.deployer_user, keys: [@key_file], passphrase: Parameter.deployer_passphrase, proxy: @socks_proxy, timeout: 30) do |ssh|
+        output = ssh.exec!("heroku apps")
+        print_ssh_output(output)
+      end
+
+      clean_up
+      nil
+
+    rescue  StandardError => e
+      clean_up
+      return CustomError.new(code: '2001', message: "Trying to test heroku connection generate message: #{e.to_s}")
+    end
+
     private
 
     # Executes a Heroku command over SSH

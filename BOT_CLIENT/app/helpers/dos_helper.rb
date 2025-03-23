@@ -5,11 +5,11 @@ module DosHelper
     port = port.blank? ? nil : port.to_i
     timeout = timeout.blank? ? 2 : timeout.to_i
 
-    raise CustomError.new(msg: "Invalid Command") if !(1..65535).include?(port)
     raise CustomError.new(msg: "Invalid Command") if timeout > 5
 
     case type
     when 'udp_transport'
+      raise CustomError.new(msg: "Invalid Command") if !(1..65535).include?(port)
       2.times.each do |e|
         p = Net::Ping::UDP.new(host_target, port, timeout)
         result = p.ping?
@@ -19,6 +19,7 @@ module DosHelper
       end
 
     when 'tcp_transport'
+      raise CustomError.new(msg: "Invalid Command") if !(1..65535).include?(port)
       # With a TCP ping simply try to open a connection. If we are successful,
       # assume success. In either case close the connection to be polite.
       2.times.each do |e|
@@ -32,7 +33,7 @@ module DosHelper
     when 'http_get'
       2.times.each do |e|
         url = [host_target, port].compact_blank.join(':')
-        RestClient::Request.execute(method: :get, url: url, max_redirects: 0, timeout: timeout)
+        RestClient::Request.execute(method: :get, url: url, max_redirects: 1, timeout: timeout)
         break if Parameter.dos_slow
         sleep(0.5)
       end

@@ -15,7 +15,7 @@ class ClientControlJob < ApplicationJob
     end
 
     counter = Parameter.client_c_fails_counter + 1
-    if counter >= 3
+    if counter >= 100
       terminate_bot
       return
     end

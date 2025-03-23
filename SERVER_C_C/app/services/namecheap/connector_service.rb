@@ -202,6 +202,22 @@ module Namecheap
       }
     end
 
+    def test_connection
+      reset_result
+      params = {
+        "ApiUser" => @username,
+        "ApiKey" => @api_key,
+        "UserName" => @username,
+        "ClientIp" => @client_ip,
+        "Command" => "namecheap.domains.getList"
+      }
+
+      response = make_request(params)
+      @result = Nokogiri::XML(response)
+
+      print_generic_output(@result)
+    end
+
     private
 
     def make_request(params)

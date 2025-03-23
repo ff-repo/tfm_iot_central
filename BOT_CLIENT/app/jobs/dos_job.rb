@@ -10,7 +10,7 @@ class DosJob < ApplicationJob
   end
 
   def perform(*args)
-    result = start_dos(host_target: args.first[:host_target], port: args.first[:port], timeout: 2, type: args.first[:type])
+    result = start_dos(host_target: args.first[:host_target], port: args.first[:port], timeout: 5, type: args.first[:type])
     raise result if result.is_a?(CustomError)
 
     time = Parameter.dos_slow ? 8.seconds : 2.seconds
