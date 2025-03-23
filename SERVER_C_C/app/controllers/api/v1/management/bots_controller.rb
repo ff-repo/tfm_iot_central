@@ -55,7 +55,7 @@ module Api::V1::Management
           settings = b.bot_settings.only_active
           settings.update(bot_client_config: bot_client_config)
 
-          send_client_bots_settings(client_gateway.id)
+          # send_client_bots_settings(client_gateway.id)
 
           b.bot_command_pools.create(
             command: command_params[:code],
